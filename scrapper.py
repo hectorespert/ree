@@ -1,6 +1,6 @@
-from reescrapper import HierroDemand
+from reescrapper import DemandHierro
 
-generation = HierroDemand().get()
+generation = DemandHierro().get()
 print(generation)
 
 

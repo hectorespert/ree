@@ -1,3 +1,3 @@
-from .tenerifedemand import TenerifeDemand
-from .tenerifegeneration import TenerifeGeneration
-from .hierrodemand import HierroDemand
+from .demandtenerife import DemandTenerife
+from .generationtenerife import GenerationTenerife
+from .demandhierro import DemandHierro

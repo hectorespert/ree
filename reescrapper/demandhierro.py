@@ -7,11 +7,11 @@ from reescrapper.responses import Demand
 from reescrapper.core import Scrapper
 
 
-class TenerifeDemand(Scrapper):
+class DemandHierro(Scrapper):
 
     def __init__(self):
         super().__init__()
-        self.url = "https://demanda.ree.es/movil/canarias/tenerife/tablas/1"
+        self.url = "https://demanda.ree.es/movil/canarias/el_hierro/tablas/1"
 
     def get(self):
         demands = []

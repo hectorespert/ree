@@ -6,7 +6,7 @@ from reescrapper.responses import Generation
 from reescrapper.core import Scrapper
 
 
-class TenerifeGeneration(Scrapper):
+class GenerationTenerife(Scrapper):
 
     def __init__(self):
         super().__init__()

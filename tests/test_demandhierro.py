@@ -1,17 +1,17 @@
 import unittest
 
-from reescrapper import HierroDemand
+from reescrapper import DemandHierro
 from reescrapper.responses import Demand
 
 
-class TestHierroDemand(unittest.TestCase):
+class TestDemandHierro(unittest.TestCase):
 
     def test_instance(self):
-        instance = HierroDemand()
-        self.assertIsInstance(instance, HierroDemand)
+        instance = DemandHierro()
+        self.assertIsInstance(instance, DemandHierro)
 
     def test_get(self):
-        demand = HierroDemand().get()
+        demand = DemandHierro().get()
         self.assertIsInstance(demand, Demand)
 
 if __name__ == '__main__':
