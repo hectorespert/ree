@@ -3,7 +3,7 @@ from arrow import get
 
 class Generation:
 
-    def __init__(self, timestamp, diesel, gas, wind, combined, vapor, solar, hydraulic):
+    def __init__(self, timestamp, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0):
         self.timestamp = timestamp
         self.diesel = diesel
         self.gas = gas

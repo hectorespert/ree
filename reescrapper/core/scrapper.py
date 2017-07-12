@@ -6,8 +6,11 @@ from arrow import get
 
 class Scrapper:
 
-    def __init__(self):
-        self.driver = webdriver.PhantomJS(service_log_path=path.devnull)
+    def __init__(self, driver=None):
+        if driver:
+            self.driver = driver
+        else:
+            self.driver = webdriver.PhantomJS(service_log_path=path.devnull)
         self.html = None
 
     def _gethtml(self, url):

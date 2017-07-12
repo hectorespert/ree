@@ -5,8 +5,8 @@ from ..responses import Generation
 
 class GenerationScrapper(Scrapper):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, driver=None):
+        super().__init__(driver)
 
     def _get(self, url):
         generations = []
