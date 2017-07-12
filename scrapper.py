@@ -1,6 +1,6 @@
-from reescrapper import TenerifeGeneration
+from reescrapper import HierroDemand
 
-generation = TenerifeGeneration().get()
+generation = HierroDemand().get()
 print(generation)
 
 
