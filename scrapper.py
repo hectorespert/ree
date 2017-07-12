@@ -1,7 +1,13 @@
 from reescrapper import DemandHierro
+from reescrapper import DemandTenerife
 
-generation = DemandHierro().get()
-print(generation)
+print("Hierro")
+hierro = DemandHierro().get()
+print(hierro)
+
+print("Tenerife")
+tenerife = DemandTenerife().get()
+print(tenerife)
 
 
 
