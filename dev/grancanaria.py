@@ -1,7 +1,4 @@
-from reescraper import GenerationGranCanaria, DemandGranCanaria
+from reescraper import GranCanaria
 
-demand = DemandGranCanaria().get()
-print(demand)
-
-generation = GenerationGranCanaria().get()
-print(generation)
+response = GranCanaria().get()
+print(response)

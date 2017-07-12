@@ -1,10 +1,11 @@
 from arrow import get
 
 
-class Generation:
+class Response:
 
-    def __init__(self, timestamp, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0):
+    def __init__(self, timestamp, demand=None, diesel=None, gas=None, wind=None, combined=None, vapor=None, solar=None, hydraulic=None):
         self.timestamp = timestamp
+        self.demand = demand
         self.diesel = diesel
         self.gas = gas
         self.wind = wind
@@ -14,8 +15,9 @@ class Generation:
         self.hydraulic = hydraulic
 
     def __str__(self):
-        base = "Generation {0} Diesel: {1} Gas: {2} Wind: {3} Combined: {4} Vapor: {5} Solar: {6} Hydraulic: {7}"
+        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8}"
         return base.format(get(self.timestamp),
+                           self.demand,
                            self.diesel,
                            self.gas,
                            self.wind,

@@ -1,5 +1,5 @@
 from .core import Scraper
-from .responses import Generation
+from .response import Response
 from .generationfuerteventura import GenerationFuerteventura
 from .generationgomera import GenerationGomera
 from .generationgrancanaria import GenerationGranCanaria
@@ -36,7 +36,7 @@ class GenerationCanaryIslands(Scraper):
 
     def __generation(self):
         timestamp = self.__timestamp()
-        generation = Generation(timestamp)
+        generation = Response(timestamp)
         generation.diesel = self.__diesel()
         generation.gas = self.__gas()
         generation.wind = self.__wind()

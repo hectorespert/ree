@@ -1,30 +1,23 @@
-from selenium import webdriver
-from os import path
-from bs4 import BeautifulSoup
 from arrow import get
+from requests import Session
+from re import sub
+from json import loads
 
 
 class Scraper:
 
-    def __init__(self, driver=None):
-        if driver:
-            self.driver = driver
+    def __init__(self, session=None):
+        if session and isinstance(session, Session):
+            self.session = session
         else:
-            self.driver = webdriver.PhantomJS(service_log_path=path.devnull)
-        self.html = None
+            self.session = Session()
 
-    def _gethtml(self, url):
-        self.driver.get(url)
-        self.html = BeautifulSoup(self.driver.page_source, 'html.parser')
-
-    def _rows(self):
-        if not self.html:
-            return None
-        else:
-            return self.html.find_all('tr', class_='ng-scope')
-
-    def _cells(self, row):
-        return row.find_all('td', class_='ng-scope ng-binding')
+    def _getjson(self, url):
+        response = self.session.request("GET", self.url)
+        removed_null = sub("null\(", "", response.text)
+        response_cleaned = sub("\);", "", removed_null)
+        json = loads(response_cleaned)
+        return json['valoresHorariosGeneracion']
 
     def _timestamp(self, date_str, timezone):
         return get(date_str + ' ' + timezone, 'YYYY-MM-DD HH:mm ZZZ')
