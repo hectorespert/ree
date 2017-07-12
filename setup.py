@@ -13,5 +13,5 @@ setup(
     license='MIT',
     author='blackleg',
     author_email='hectorespertpardo@gmail.com',
-    description='Red electrica de España scrapper'
+    description='Red Eléctrica de España data scraper'
 )
