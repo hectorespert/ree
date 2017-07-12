@@ -1,6 +1,6 @@
 import unittest
 
-from reescrapper import GenerationTenerife
+from reescraper import GenerationTenerife
 
 
 class TestGenerationTenerife(unittest.TestCase):

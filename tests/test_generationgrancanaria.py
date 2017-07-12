@@ -1,6 +1,6 @@
 import unittest
 
-from reescrapper import GenerationGranCanaria
+from reescraper import GenerationGranCanaria
 
 
 class TestGenerationHierro(unittest.TestCase):

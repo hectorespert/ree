@@ -50,43 +50,43 @@ class GenerationCanaryIslands(Scraper):
         diesel = 0.0
         for gen in self.__generations:
             diesel += gen.diesel
-        return diesel
+        return round(diesel, 2)
 
     def __gas(self):
         gas = 0.0
         for gen in self.__generations:
             gas += gen.gas
-        return gas
+        return round(gas, 2)
 
     def __wind(self):
         wind = 0.0
         for gen in self.__generations:
             wind += gen.wind
-        return wind
+        return round(wind, 2)
 
     def __combined(self):
         combined = 0.0
         for gen in self.__generations:
             combined += gen.combined
-        return combined
+        return round(combined, 2)
 
     def __vapor(self):
         vapor = 0.0
         for gen in self.__generations:
             vapor += gen.vapor
-        return vapor
+        return round(vapor, 2)
 
     def __solar(self):
         solar = 0.0
         for gen in self.__generations:
             solar += gen.solar
-        return solar
+        return round(solar, 2)
 
     def __hydraulic(self):
         hydraulic = 0.0
         for gen in self.__generations:
             hydraulic += gen.hydraulic
-        return hydraulic
+        return round(hydraulic, 2)
 
     def __timestamp(self):
         generation = self.__generations[0]

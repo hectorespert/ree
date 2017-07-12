@@ -1,6 +1,6 @@
 import unittest
 
-from reescrapper import DemandTenerife
+from reescraper import DemandTenerife
 
 
 class TestDemandTenerife(unittest.TestCase):
