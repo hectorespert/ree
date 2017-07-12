@@ -9,7 +9,7 @@ setup(
         'beautifulsoup4',
         'selenium'
       ],
-    url='https://github.com/blackleg/reescrapper',
+    url='https://github.com/blackleg/reescraper',
     license='MIT',
     author='blackleg',
     author_email='hectorespertpardo@gmail.com',
