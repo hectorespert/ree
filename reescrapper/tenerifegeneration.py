@@ -29,7 +29,7 @@ class TenerifeGeneration(Scrapper):
             solar_value = float(cleaned[7].get_text())
             hydraulic_value = float(cleaned[8].get_text())
             dt = get(date_value + ' Atlantic/Canary', 'YYYY-MM-DD HH:mm ZZZ')
-            generation = Generation(dt.float_timestamp)
+            generation = Generation(dt.float_timestamp, diesel_value, gas_value, wind_value, combined_value, vapor_value, solar_value, hydraulic_value)
             generations.append(generation)
 
         if generations:

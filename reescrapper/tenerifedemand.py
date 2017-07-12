@@ -10,6 +10,7 @@ from reescrapper.core import Scrapper
 class TenerifeDemand(Scrapper):
 
     def __init__(self):
+        super().__init__()
         self.url = "https://demanda.ree.es/movil/canarias/tenerife/tablas/1"
 
     def get(self):

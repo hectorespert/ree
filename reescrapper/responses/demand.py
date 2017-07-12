@@ -1,3 +1,4 @@
+from arrow import get
 
 
 class Demand:
@@ -7,4 +8,5 @@ class Demand:
         self.timestamp = timestamp
 
     def __str__(self):
-        return str(self.timestamp) + " " + str(self.demand)
+        base = "Demand {0} {1} "
+        return base.format(get(self.timestamp), self.demand)
