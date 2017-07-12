@@ -1,9 +1,9 @@
 from operator import attrgetter
-from .scrapper import Scrapper
+from .scraper import Scraper
 from ..responses import Generation
 
 
-class GenerationScrapper(Scrapper):
+class GenerationScraper(Scraper):
 
     def __init__(self, driver=None):
         super().__init__(driver)

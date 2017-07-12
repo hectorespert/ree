@@ -1,4 +1,4 @@
-from reescrapper import GenerationFuerteventura
+from reescraper import GenerationFuerteventura
 from selenium import webdriver
 from os import path
 

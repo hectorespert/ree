@@ -1,4 +1,4 @@
-from reescrapper import GenerationCanaryIslands
+from reescraper import GenerationCanaryIslands
 
 generation = GenerationCanaryIslands().get()
 print(generation)

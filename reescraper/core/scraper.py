@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from arrow import get
 
 
-class Scrapper:
+class Scraper:
 
     def __init__(self, driver=None):
         if driver:

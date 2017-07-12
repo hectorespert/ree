@@ -1,7 +1,7 @@
-from .core import DemandScrapper
+from .core import DemandScraper
 
 
-class DemandPalma(DemandScrapper):
+class DemandPalma(DemandScraper):
 
     def __init__(self):
         super().__init__()

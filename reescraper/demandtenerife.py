@@ -1,7 +1,7 @@
-from .core import DemandScrapper
+from .core import DemandScraper
 
 
-class DemandTenerife(DemandScrapper):
+class DemandTenerife(DemandScraper):
 
     def __init__(self):
         super().__init__()

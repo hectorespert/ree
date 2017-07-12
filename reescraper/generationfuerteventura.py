@@ -1,7 +1,7 @@
-from .core import GenerationScrapper
+from .core import GenerationScraper
 
 
-class GenerationFuerteventura(GenerationScrapper):
+class GenerationFuerteventura(GenerationScraper):
 
     def __init__(self, driver=None):
         super().__init__(driver)

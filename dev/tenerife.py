@@ -1,4 +1,4 @@
-from reescrapper import GenerationTenerife, DemandTenerife
+from reescraper import GenerationTenerife, DemandTenerife
 
 demand = DemandTenerife().get()
 print(demand)

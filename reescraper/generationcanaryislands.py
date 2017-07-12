@@ -1,4 +1,4 @@
-from .core import Scrapper
+from .core import Scraper
 from .responses import Generation
 from .generationfuerteventura import GenerationFuerteventura
 from .generationgomera import GenerationGomera
@@ -17,7 +17,7 @@ class TimestampException(Exception):
     pass
 
 
-class GenerationCanaryIslands(Scrapper):
+class GenerationCanaryIslands(Scraper):
 
     def __init__(self):
         super().__init__()

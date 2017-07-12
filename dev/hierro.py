@@ -1,4 +1,4 @@
-from reescrapper import GenerationHierro, DemandHierro
+from reescraper import GenerationHierro, DemandHierro
 
 demand = DemandHierro().get()
 print(demand)

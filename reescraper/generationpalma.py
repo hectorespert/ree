@@ -1,7 +1,7 @@
-from .core import GenerationScrapper
+from .core import GenerationScraper
 
 
-class GenerationPalma(GenerationScrapper):
+class GenerationPalma(GenerationScraper):
 
     def __init__(self, driver=None):
         super().__init__(driver)

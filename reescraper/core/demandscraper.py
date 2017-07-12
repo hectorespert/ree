@@ -1,9 +1,9 @@
 from operator import attrgetter
-from .scrapper import Scrapper
+from .scraper import Scraper
 from ..responses import Demand
 
 
-class DemandScrapper(Scrapper):
+class DemandScraper(Scraper):
 
     def __init__(self):
         super().__init__()

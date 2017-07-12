@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-    name='reescrapper',
+    name='reescraper',
     version='0.0.1',
-    packages=['reescrapper'],
+    packages=['reescraper'],
     install_requires=[
         'arrow',
         'beautifulsoup4',
