@@ -1,7 +1,4 @@
 import unittest
-import warnings
-
-warnings.simplefilter("ignore", ResourceWarning)
 
 from reescraper import CanaryIslands, Response, NoDataException, TimestampException
 
@@ -25,4 +22,4 @@ class TestCanaryIslands(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(warnings='ignore')
+    unittest.main()
