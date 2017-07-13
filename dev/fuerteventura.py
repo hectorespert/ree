@@ -1,8 +1,6 @@
-from reescraper import GenerationFuerteventura
-from selenium import webdriver
-from os import path
+from requests import Session
+from reescraper import Fuerteventura
+session = Session()
 
-driver = webdriver.PhantomJS(service_log_path=path.devnull)
-
-generation = GenerationFuerteventura(driver).get()
+generation = Fuerteventura(session).get()
 print(generation)

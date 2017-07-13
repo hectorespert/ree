@@ -1,7 +1,4 @@
-from reescraper import GenerationHierro, DemandHierro
+from reescraper import ElHierro
 
-demand = DemandHierro().get()
-print(demand)
-
-generation = GenerationHierro().get()
-print(generation)
+response = ElHierro().get()
+print(response)

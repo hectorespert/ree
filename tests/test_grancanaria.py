@@ -3,7 +3,7 @@ import unittest
 from reescraper import GranCanaria
 
 
-class TestDemandGranCanaria(unittest.TestCase):
+class TestGranCanaria(unittest.TestCase):
 
     def test_instance(self):
         instance = GranCanaria()

@@ -1,12 +1,10 @@
 from .core import Scraper
 
 
-class GranCanaria(Scraper):
+class ElHierro(Scraper):
 
     def __init__(self, session=None):
         super().__init__(session)
 
     def get(self):
-        return super().get("GCANARIA", "Atlantic/Canary")
-
-
+        return super().get("EL_HIERRO", "Atlantic/Canary")

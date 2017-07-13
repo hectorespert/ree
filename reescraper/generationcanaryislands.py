@@ -1,9 +1,9 @@
 from .core import Scraper
 from .response import Response
-from .generationfuerteventura import GenerationFuerteventura
+from .fuerteventura import Fuerteventura
 from .generationgomera import GenerationGomera
 from .generationgrancanaria import GenerationGranCanaria
-from .generationhierro import GenerationHierro
+from .elhierro import ElHierro
 from .generationlanzarote import GenerationLanzarote
 from .generationpalma import GenerationPalma
 from .generationtenerife import GenerationTenerife
@@ -103,7 +103,7 @@ class GenerationCanaryIslands(Scraper):
                 raise TimestampException
 
     def __fuerteventura(self):
-        fuerteventura = GenerationFuerteventura(self.driver).get()
+        fuerteventura = Fuerteventura(self.driver).get()
         if not fuerteventura:
             raise NoDataException
         else:
@@ -124,7 +124,7 @@ class GenerationCanaryIslands(Scraper):
             self.__generations.append(granacanaria)
 
     def __hierro(self):
-        hierro = GenerationHierro(self.driver).get()
+        hierro = ElHierro(self.driver).get()
         if not hierro:
             raise NoDataException
         else:
