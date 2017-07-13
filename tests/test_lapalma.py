@@ -3,7 +3,7 @@ import unittest
 from reescraper import LaPalma
 
 
-class TestTenerife(unittest.TestCase):
+class TestLaPalma(unittest.TestCase):
 
     def test_instance(self):
         instance = LaPalma()
