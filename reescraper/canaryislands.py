@@ -12,7 +12,7 @@ from .tenerife import Tenerife
 class CanaryIslands(Scraper):
 
     def __init__(self, session=None):
-        super().__init__(session)
+        super(self.__class__, self).__init__(session)
         self.__responses = []
 
     def get(self):
@@ -30,7 +30,7 @@ class CanaryIslands(Scraper):
     def __response(self):
         timestamp = self.__timestamp()
         response = Response(timestamp)
-        response.demand = 0.0
+        response.demand = self.__demand()
         response.diesel = self.__diesel()
         response.gas = self.__gas()
         response.wind = self.__wind()

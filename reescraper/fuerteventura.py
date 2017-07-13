@@ -4,7 +4,7 @@ from .core import Scraper
 class Fuerteventura(Scraper):
 
     def __init__(self, session=None):
-        super().__init__(session)
+        super(self.__class__, self).__init__(session)
 
     def get(self):
-        return super().get("FUERTEVE", "Atlantic/Canary")
+        return super(self.__class__, self).get("FUERTEVE", "Atlantic/Canary")

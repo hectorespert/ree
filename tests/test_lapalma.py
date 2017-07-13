@@ -1,13 +1,22 @@
 import unittest
 
-from reescraper import LaPalma
+from reescraper import LaPalma, Response
 
 
 class TestLaPalma(unittest.TestCase):
 
+    def setUp(self):
+        self.instance = LaPalma()
+
     def test_instance(self):
-        instance = LaPalma()
-        self.assertIsInstance(instance, LaPalma)
+        self.assertIsInstance(self.instance, LaPalma)
+
+    def test_get(self):
+        response = self.instance.get()
+        if response:
+            self.assertIsInstance(response, Response)
+        else:
+            self.assertIsNone(response)
 
 if __name__ == '__main__':
     unittest.main()

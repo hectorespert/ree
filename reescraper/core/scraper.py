@@ -7,7 +7,7 @@ from ..response import Response
 from .exceptions import ResponseCodeException, ResponseDataException
 
 
-class Scraper:
+class Scraper(object):
 
     def __init__(self, session=None):
         if session and isinstance(session, Session):
