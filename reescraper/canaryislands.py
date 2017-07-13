@@ -1,29 +1,22 @@
-from .core import Scraper
+from .core import Scraper, NoDataException, TimestampException
 from .response import Response
 from .fuerteventura import Fuerteventura
 from .gomera import Gomera
-from .generationgrancanaria import GenerationGranCanaria
+from .grancanaria import GranCanaria
 from .elhierro import ElHierro
 from .lanzarote import Lanzarote
 from .lapalma import LaPalma
 from .tenerife import Tenerife
 
 
-class NoDataException(Exception):
-    pass
+class CanaryIslands(Scraper):
 
-
-class TimestampException(Exception):
-    pass
-
-
-class GenerationCanaryIslands(Scraper):
-
-    def __init__(self):
-        super().__init__()
-        self.__generations = []
+    def __init__(self, session=None):
+        super().__init__(session)
+        self.__responses = []
 
     def get(self):
+        self.__responses = []
         self.__fuerteventura()
         self.__gomera()
         self.__grancanaria()
@@ -32,64 +25,71 @@ class GenerationCanaryIslands(Scraper):
         self.__palma()
         self.__tenerife()
         self.__checkgenerations()
-        return self.__generation()
+        return self.__response()
 
-    def __generation(self):
+    def __response(self):
         timestamp = self.__timestamp()
-        generation = Response(timestamp)
-        generation.diesel = self.__diesel()
-        generation.gas = self.__gas()
-        generation.wind = self.__wind()
-        generation.combined = self.__combined()
-        generation.vapor = self.__vapor()
-        generation.solar = self.__solar()
-        generation.hydraulic = self.__hydraulic()
-        return generation
+        response = Response(timestamp)
+        response.demand = 0.0
+        response.diesel = self.__diesel()
+        response.gas = self.__gas()
+        response.wind = self.__wind()
+        response.combined = self.__combined()
+        response.vapor = self.__vapor()
+        response.solar = self.__solar()
+        response.hydraulic = self.__hydraulic()
+        return response
+
+    def __demand(self):
+        demand = 0.0
+        for gen in self.__responses:
+            demand += gen.demand
+        return round(demand, 2)
 
     def __diesel(self):
         diesel = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             diesel += gen.diesel
         return round(diesel, 2)
 
     def __gas(self):
         gas = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             gas += gen.gas
         return round(gas, 2)
 
     def __wind(self):
         wind = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             wind += gen.wind
         return round(wind, 2)
 
     def __combined(self):
         combined = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             combined += gen.combined
         return round(combined, 2)
 
     def __vapor(self):
         vapor = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             vapor += gen.vapor
         return round(vapor, 2)
 
     def __solar(self):
         solar = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             solar += gen.solar
         return round(solar, 2)
 
     def __hydraulic(self):
         hydraulic = 0.0
-        for gen in self.__generations:
+        for gen in self.__responses:
             hydraulic += gen.hydraulic
         return round(hydraulic, 2)
 
     def __timestamp(self):
-        generation = self.__generations[0]
+        generation = self.__responses[0]
         timestamp = generation.timestamp
         if not timestamp:
             raise TimestampException
@@ -98,55 +98,55 @@ class GenerationCanaryIslands(Scraper):
 
     def __checkgenerations(self):
         timestamp = self.__timestamp()
-        for gen in self.__generations:
+        for gen in self.__responses:
             if gen.timestamp != timestamp:
                 raise TimestampException
 
     def __fuerteventura(self):
-        fuerteventura = Fuerteventura(self.driver).get()
+        fuerteventura = Fuerteventura(self.session).get()
         if not fuerteventura:
             raise NoDataException
         else:
-            self.__generations.append(fuerteventura)
+            self.__responses.append(fuerteventura)
 
     def __gomera(self):
-        gomera = Gomera(self.driver).get()
+        gomera = Gomera(self.session).get()
         if not gomera:
             raise NoDataException
         else:
-            self.__generations.append(gomera)
+            self.__responses.append(gomera)
 
     def __grancanaria(self):
-        granacanaria = GenerationGranCanaria(self.driver).get()
+        granacanaria = GranCanaria(self.session).get()
         if not granacanaria:
             raise NoDataException
         else:
-            self.__generations.append(granacanaria)
+            self.__responses.append(granacanaria)
 
     def __hierro(self):
-        hierro = ElHierro(self.driver).get()
+        hierro = ElHierro(self.session).get()
         if not hierro:
             raise NoDataException
         else:
-            self.__generations.append(hierro)
+            self.__responses.append(hierro)
 
     def __lanzarote(self):
-        lanzarote = Lanzarote(self.driver).get()
+        lanzarote = Lanzarote(self.session).get()
         if not lanzarote:
             raise NoDataException
         else:
-            self.__generations.append(lanzarote)
+            self.__responses.append(lanzarote)
 
     def __palma(self):
-        palma = LaPalma(self.driver).get()
+        palma = LaPalma(self.session).get()
         if not palma:
             raise NoDataException
         else:
-            self.__generations.append(palma)
+            self.__responses.append(palma)
 
     def __tenerife(self):
-        tenerife = Tenerife(self.driver).get()
+        tenerife = Tenerife(self.session).get()
         if not tenerife:
             raise NoDataException
         else:
-            self.__generations.append(tenerife)
+            self.__responses.append(tenerife)

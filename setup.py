@@ -2,12 +2,11 @@ from distutils.core import setup
 
 setup(
     name='reescraper',
-    version='0.0.1',
+    version='1.0.0',
     packages=['reescraper'],
     install_requires=[
         'arrow',
-        'beautifulsoup4',
-        'selenium'
+        'requests'
       ],
     url='https://github.com/blackleg/reescraper',
     license='MIT',

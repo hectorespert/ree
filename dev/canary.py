@@ -1,4 +1,4 @@
-from reescraper import GenerationCanaryIslands
+from reescraper import CanaryIslands
 
-generation = GenerationCanaryIslands().get()
-print(generation)
+response = CanaryIslands().get()
+print(response)
