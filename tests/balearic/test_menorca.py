@@ -1,15 +1,15 @@
 import unittest
 
-from reescraper import Response, Mallorca
+from reescraper import Response, Menorca
 
 
-class TestMallorca(unittest.TestCase):
+class TestMenorca(unittest.TestCase):
 
     def setUp(self):
-        self.instance = Mallorca()
+        self.instance = Menorca()
 
     def test_instance(self):
-        self.assertIsInstance(self.instance, Mallorca)
+        self.assertIsInstance(self.instance, Menorca)
 
     def test_get(self):
         response = self.instance.get()
