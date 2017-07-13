@@ -5,7 +5,7 @@ from .generationgomera import GenerationGomera
 from .generationgrancanaria import GenerationGranCanaria
 from .elhierro import ElHierro
 from .generationlanzarote import GenerationLanzarote
-from .generationpalma import GenerationPalma
+from .lapalma import LaPalma
 from .tenerife import Tenerife
 
 
@@ -138,7 +138,7 @@ class GenerationCanaryIslands(Scraper):
             self.__generations.append(lanzarote)
 
     def __palma(self):
-        palma = GenerationPalma(self.driver).get()
+        palma = LaPalma(self.driver).get()
         if not palma:
             raise NoDataException
         else:
