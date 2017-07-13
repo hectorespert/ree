@@ -10,3 +10,8 @@ reescraper/grancanaria.py
 reescraper/lanzarote.py
 reescraper/lapalma.py
 reescraper/tenerife.py
+reescraper/core/__init__.py
+reescraper/core/exceptions.py
+reescraper/core/scraper.py
+reescraper/response/__init__.py
+reescraper/response/response.py
