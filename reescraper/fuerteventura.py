@@ -7,4 +7,4 @@ class Fuerteventura(Scraper):
         super().__init__(session)
 
     def get(self):
-        return super().get("GCANARIA", "Atlantic/Canary")
+        return super().get("FUERTEVE", "Atlantic/Canary")
