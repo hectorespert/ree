@@ -1,13 +1,5 @@
 # reescraper (Red Eléctrica de España data scraper)
 
-Require phantomjs binary available in your system path.
-
-Ubuntu phantomjs install:
-
-```
-sudo apt install phantomjs
-```
-
 Package install:
 
 ```
@@ -17,13 +9,13 @@ pip install reescraper
 Example Code:
 
 ```python
-from reescraper import GenerationCanaryIslands
+from reescraper import CanaryIslands
 
-generation = GenerationCanaryIslands().get()
+generation = CanaryIslands().get()
 print(generation)
 ```
 Output:
 
 ```
-Generation 2017-07-12T19:20:00+00:00 Diesel: 310.0 Gas: 115.2 Wind: 57.6 Combined: 315.0 Vapor: 394.0 Solar: 1.9 Hydraulic: -0.2
+Response 2017-07-13T10:20:00+00:00 Demand 0.0 Diesel: 282.2 Gas: 159.4 Wind: 48.2 Combined: 338.3 Vapor: 329.5 Solar: 89.0 Hydraulic: -3.4
 ```
