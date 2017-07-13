@@ -1,15 +1,15 @@
 import unittest
 
-from reescraper import ElHierro, Response
+from reescraper import Response, Mallorca
 
 
 class TestElHierro(unittest.TestCase):
 
     def setUp(self):
-        self.instance = ElHierro()
+        self.instance = Mallorca()
 
     def test_instance(self):
-        self.assertIsInstance(self.instance, ElHierro)
+        self.assertIsInstance(self.instance, Mallorca)
 
     def test_get(self):
         response = self.instance.get()

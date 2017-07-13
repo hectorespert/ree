@@ -31,6 +31,9 @@ class TestScraper(TestCase):
         result = self.scrapper._makeurl(zone, date)
         expected = "https://demanda.ree.es/WSvisionaMovilesCanariasRest/resources/demandaGeneracionCanarias?curva=GCANARIA&fecha=2017-07-13"
         self.assertEqual(result, expected)
+        result = self.scrapper._makeurl(zone, date, "Baleares")
+        expected = "https://demanda.ree.es/WSvisionaMovilesBalearesRest/resources/demandaGeneracionBaleares?curva=GCANARIA&fecha=2017-07-13"
+        self.assertEqual(result, expected)
 
 if __name__ == '__main__':
     main()

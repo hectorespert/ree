@@ -1,0 +1,1 @@
+from .mallorca import Mallorca

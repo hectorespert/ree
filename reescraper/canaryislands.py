@@ -1,12 +1,6 @@
+from .canary import ElHierro, Fuerteventura, GranCanaria, Gomera, Lanzarote, LaPalma, Tenerife
 from .core import Scraper, NoDataException, TimestampException
 from .response import Response
-from .fuerteventura import Fuerteventura
-from .gomera import Gomera
-from .grancanaria import GranCanaria
-from .elhierro import ElHierro
-from .lanzarote import Lanzarote
-from .lapalma import LaPalma
-from .tenerife import Tenerife
 
 
 class CanaryIslands(Scraper):

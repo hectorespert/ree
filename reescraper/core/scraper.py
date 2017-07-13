@@ -15,10 +15,10 @@ class Scraper(object):
         else:
             self.session = Session()
 
-    def get(self, zone, timezone, date=None):
+    def get(self, zone, timezone, system="Canarias", date=None):
         if not date:
             date = self._searchdate(timezone)
-        url = self._makeurl(zone, date)
+        url = self._makeurl(zone, date, system)
         responses = []
         for value in self._request(url):
             ts = value['ts']
@@ -29,9 +29,11 @@ class Scraper(object):
             response.gas = value['gas']
             response.wind = value['eol']
             response.combined = value['cc']
-            response.vapor = value['vap']
+            if 'vap' in value:
+                response.vapor = value['vap']
             response.solar = value['fot']
-            response.hydraulic = value['hid']
+            if 'hid' in value:
+                response.hydraulic = value['hid']
             responses.append(response)
         return max(responses, key=attrgetter('timestamp'))
 
@@ -43,9 +45,9 @@ class Scraper(object):
             raise ResponseDataException
         return self.__getjson(response.text)
 
-    def _makeurl(self, zone, date):
-        base = "https://demanda.ree.es/WSvisionaMovilesCanariasRest/resources/demandaGeneracionCanarias?curva={0}&fecha={1}"
-        return base.format(zone, date)
+    def _makeurl(self, zone, date, system="Canarias"):
+        base = "https://demanda.ree.es/WSvisionaMoviles{2}Rest/resources/demandaGeneracion{2}?curva={0}&fecha={1}"
+        return base.format(zone, date, system)
 
     def __getjson(self, text):
         removed_null = sub("null\(", "", text)

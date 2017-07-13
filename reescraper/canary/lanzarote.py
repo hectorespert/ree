@@ -1,4 +1,4 @@
-from .core import Scraper
+from reescraper.core import Scraper
 
 
 class Lanzarote(Scraper):
