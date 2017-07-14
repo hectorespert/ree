@@ -34,6 +34,10 @@ class Scraper(object):
             response.solar = value['fot']
             if 'hid' in value:
                 response.hydraulic = value['hid']
+            if 'car' in value:
+                response.carbon = value['car']
+            if 'cb' in value:
+                response.link['pe_ma'] = value['cb']
             responses.append(response)
         return max(responses, key=attrgetter('timestamp'))
 

@@ -3,7 +3,7 @@ from arrow import get
 
 class Response:
 
-    def __init__(self, timestamp, demand=None, diesel=None, gas=None, wind=None, combined=None, vapor=None, solar=None, hydraulic=None):
+    def __init__(self, timestamp, demand=0.0, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0, carbon=0.0):
         self.timestamp = timestamp
         self.demand = demand
         self.diesel = diesel
@@ -13,9 +13,11 @@ class Response:
         self.vapor = vapor
         self.solar = solar
         self.hydraulic = hydraulic
+        self.carbon = carbon
+        self.link = {}
 
     def __str__(self):
-        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8}"
+        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9}"
         return base.format(get(self.timestamp),
                            self.demand,
                            self.diesel,
@@ -24,4 +26,20 @@ class Response:
                            self.combined,
                            self.vapor,
                            self.solar,
-                           self.hydraulic)
+                           self.hydraulic,
+                           self.carbon)
+
+    def production(self):
+        """Calculate total energy production."""
+        return round(self.diesel + self.gas + self.wind + self.combined + self.vapor + self.solar + self.hydraulic + self.carbon, 2)
+
+    def links(self):
+        """Calculate total energy production."""
+        total = 0.0
+        for value in self.link.values():
+            total += value
+        return round(total, 2)
+
+    def unknow(self):
+        """Calculate unknow energy production."""
+        return round(self.demand - (self.production() + self.links()), 2)
