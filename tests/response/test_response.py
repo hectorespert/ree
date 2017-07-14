@@ -46,28 +46,28 @@ class TestResponse(TestCase):
         result = response.links()
         self.assertEqual(result, expected)
 
-    def test_unknow(self):
+    def test_unknown(self):
         response = Response(self.timestamp)
         response.demand = 250.0
         response.diesel = 100.0
 
         expected = 150.0
-        result = response.unknow()
+        result = response.unknown()
         self.assertEqual(result, expected)
 
         response.link['a'] = 100.0
         expected = 50.0
-        result = response.unknow()
+        result = response.unknown()
         self.assertEqual(result, expected)
 
         response.link['c'] = -300.0
         expected = 350.0
-        result = response.unknow()
+        result = response.unknown()
         self.assertEqual(result, expected)
 
         response.link['c'] = 300.0
         expected = 0.0
-        result = response.unknow()
+        result = response.unknown()
         self.assertEqual(result, expected)
 
 

@@ -40,6 +40,6 @@ class Response:
             total += value
         return round(total, 2)
 
-    def unknow(self):
-        """Calculate unknow energy production."""
+    def unknown(self):
+        """Calculate unknown energy production."""
         return max(0.0, round(self.demand - (self.production() + self.links()), 2))
