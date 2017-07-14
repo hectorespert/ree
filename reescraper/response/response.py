@@ -42,4 +42,4 @@ class Response:
 
     def unknow(self):
         """Calculate unknow energy production."""
-        return round(self.demand - (self.production() + self.links()), 2)
+        return max(0.0, round(self.demand - (self.production() + self.links()), 2))

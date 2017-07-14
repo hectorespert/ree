@@ -50,9 +50,19 @@ class TestResponse(TestCase):
         response = Response(self.timestamp)
         response.demand = 250.0
         response.diesel = 100.0
-        response.link['c'] = 100.0
+        response.link['a'] = 100.0
 
         expected = 50.0
+        result = response.unknow()
+        self.assertEqual(result, expected)
+
+        response.link['c'] = -300.0
+        expected = 350.0
+        result = response.unknow()
+        self.assertEqual(result, expected)
+
+        response.link['c'] = 300.0
+        expected = 0.0
         result = response.unknow()
         self.assertEqual(result, expected)
 
