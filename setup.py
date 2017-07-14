@@ -5,7 +5,7 @@ from distutils.core import setup
 
 setup(
     name='reescraper',
-    version='1.1.1',
+    version='1.2.0',
     packages=['reescraper', 'reescraper/core', 'reescraper/response', 'reescraper/canary', 'reescraper/balearic'],
     install_requires=[
         'arrow',
