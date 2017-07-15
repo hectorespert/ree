@@ -1,4 +1,4 @@
-from .canary import ElHierro, Fuerteventura, GranCanaria, Gomera, Lanzarote, LaPalma, Tenerife
+from .canary import ElHierro, GranCanaria, Gomera, LanzaroteFuerteventura, LaPalma, Tenerife
 from .core import Scraper, NoDataException, TimestampException
 from .response import Response
 
@@ -11,11 +11,10 @@ class CanaryIslands(Scraper):
 
     def get(self):
         self.__responses = []
-        self.__fuerteventura()
         self.__gomera()
         self.__grancanaria()
         self.__hierro()
-        self.__lanzarote()
+        self.__lanzarotefuerteventura()
         self.__palma()
         self.__tenerife()
         self.__checkgenerations()
@@ -96,13 +95,6 @@ class CanaryIslands(Scraper):
             if gen.timestamp != timestamp:
                 raise TimestampException
 
-    def __fuerteventura(self):
-        fuerteventura = Fuerteventura(self.session).get()
-        if not fuerteventura:
-            raise NoDataException
-        else:
-            self.__responses.append(fuerteventura)
-
     def __gomera(self):
         gomera = Gomera(self.session).get()
         if not gomera:
@@ -124,12 +116,12 @@ class CanaryIslands(Scraper):
         else:
             self.__responses.append(hierro)
 
-    def __lanzarote(self):
-        lanzarote = Lanzarote(self.session).get()
-        if not lanzarote:
+    def __lanzarotefuerteventura(self):
+        lanzarotefuerteventura = LanzaroteFuerteventura(self.session).get()
+        if not lanzarotefuerteventura:
             raise NoDataException
         else:
-            self.__responses.append(lanzarote)
+            self.__responses.append(lanzarotefuerteventura)
 
     def __palma(self):
         palma = LaPalma(self.session).get()
