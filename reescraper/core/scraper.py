@@ -33,7 +33,11 @@ class Scraper(object):
                 response.vapor = value['vap']
             response.solar = value['fot']
             if 'hid' in value:
-                response.hydraulic = value['hid']
+                hidro = value['hid']
+                if hidro >= 0.0:
+                    response.hydraulic = hidro
+                else:
+                    response.storage = abs(hidro)
             if 'car' in value:
                 response.carbon = value['car']
             if 'cb' in value:

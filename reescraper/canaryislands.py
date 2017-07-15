@@ -31,55 +31,62 @@ class CanaryIslands(Scraper):
         response.vapor = self.__vapor()
         response.solar = self.__solar()
         response.hydraulic = self.__hydraulic()
+        response.storage = self.__storage()
         return response
 
     def __demand(self):
         demand = 0.0
         for gen in self.__responses:
-            demand += gen.demand
-        return round(demand, 2)
+            demand += gen._demand
+        return demand
+
+    def __storage(self):
+        storage = 0.0
+        for gen in self.__responses:
+            storage += gen._storage
+        return storage
 
     def __diesel(self):
         diesel = 0.0
         for gen in self.__responses:
-            diesel += gen.diesel
-        return round(diesel, 2)
+            diesel += gen._diesel
+        return diesel
 
     def __gas(self):
         gas = 0.0
         for gen in self.__responses:
-            gas += gen.gas
-        return round(gas, 2)
+            gas += gen._gas
+        return gas
 
     def __wind(self):
         wind = 0.0
         for gen in self.__responses:
-            wind += gen.wind
-        return round(wind, 2)
+            wind += gen._wind
+        return wind
 
     def __combined(self):
         combined = 0.0
         for gen in self.__responses:
-            combined += gen.combined
-        return round(combined, 2)
+            combined += gen._combined
+        return combined
 
     def __vapor(self):
         vapor = 0.0
         for gen in self.__responses:
-            vapor += gen.vapor
-        return round(vapor, 2)
+            vapor += gen._vapor
+        return vapor
 
     def __solar(self):
         solar = 0.0
         for gen in self.__responses:
-            solar += gen.solar
-        return round(solar, 2)
+            solar += gen._solar
+        return solar
 
     def __hydraulic(self):
         hydraulic = 0.0
         for gen in self.__responses:
-            hydraulic += gen.hydraulic
-        return round(hydraulic, 2)
+            hydraulic += gen._hydraulic
+        return hydraulic
 
     def __timestamp(self):
         generation = self.__responses[0]
