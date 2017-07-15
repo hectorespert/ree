@@ -12,6 +12,7 @@ reescraper/canary/elhierro.py
 reescraper/canary/fuerteventura.py
 reescraper/canary/gomera.py
 reescraper/canary/grancanaria.py
+reescraper/canary/lanzafuerte.py
 reescraper/canary/lanzarote.py
 reescraper/canary/lapalma.py
 reescraper/canary/tenerife.py
