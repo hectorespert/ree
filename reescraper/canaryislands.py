@@ -31,7 +31,6 @@ class CanaryIslands(Scraper):
         response.vapor = self.__vapor()
         response.solar = self.__solar()
         response.hydraulic = self.__hydraulic()
-        response.storage = self.__storage()
         return response
 
     def __demand(self):
@@ -39,12 +38,6 @@ class CanaryIslands(Scraper):
         for gen in self.__responses:
             demand += gen._demand
         return demand
-
-    def __storage(self):
-        storage = 0.0
-        for gen in self.__responses:
-            storage += gen._storage
-        return storage
 
     def __diesel(self):
         diesel = 0.0

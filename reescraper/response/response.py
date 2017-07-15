@@ -15,7 +15,6 @@ class Response(object):
         self._hydraulic = hydraulic
         self._carbon = carbon
         self.link = {}
-        self._storage = 0.0
 
     @property
     def demand(self):
@@ -89,14 +88,6 @@ class Response(object):
     def carbon(self, carbon):
         self._carbon = carbon
 
-    @property
-    def storage(self):
-        return round(self._storage, 2)
-
-    @storage.setter
-    def storage(self, storage):
-        self._storage = storage
-
     def __str__(self):
         base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9}"
         return base.format(get(self.timestamp),
@@ -112,7 +103,7 @@ class Response(object):
 
     def _production(self):
         """Calculate total energy production. Not rounded"""
-        return self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon - self._storage
+        return self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon
 
     def production(self):
         """Calculate total energy production."""
