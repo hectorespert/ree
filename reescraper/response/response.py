@@ -3,9 +3,10 @@ from arrow import get
 
 class Response(object):
 
-    def __init__(self, timestamp, demand=0.0, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0, carbon=0.0, other=0.0):
+    def __init__(self, timestamp, demand=0.0, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0, carbon=0.0, nuclear=0.0, other=0.0):
         self.timestamp = timestamp
         self._demand = demand
+        self._nuclear = nuclear
         self._diesel = diesel
         self._gas = gas
         self._wind = wind
@@ -24,6 +25,14 @@ class Response(object):
     @demand.setter
     def demand(self, demand):
         self._demand = demand
+
+    @property
+    def nuclear(self):
+        return round(self._nuclear, 2)
+
+    @nuclear.setter
+    def nuclear(self, nuclear):
+        self._nuclear = nuclear
 
     @property
     def diesel(self):
@@ -98,7 +107,7 @@ class Response(object):
         self._other = other
 
     def __str__(self):
-        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9} Other: {10}"
+        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9} Nuclear: {10} Other: {11}"
         return base.format(get(self.timestamp),
                            self.demand,
                            self.diesel,
@@ -109,11 +118,12 @@ class Response(object):
                            self.solar,
                            self.hydraulic,
                            self.carbon,
+                           self.nuclear,
                            self.other)
 
     def _production(self):
         """Calculate total energy production. Not rounded"""
-        return self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon+ self._other
+        return self._nuclear + self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon + self._other
 
     def production(self):
         """Calculate total energy production."""

@@ -25,6 +25,8 @@ class Scraper(object):
             arrow = self._timestamp(ts, timezone)
             response = Response(arrow.float_timestamp)
             response.demand = value['dem']
+            if 'nuc' in value:
+                response.nuclear = value['nuc']
             if 'die' in value:
                 response.diesel = value['die']
             if 'gas' in value:
