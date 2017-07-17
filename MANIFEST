@@ -4,6 +4,7 @@ setup.py
 reescraper/__init__.py
 reescraper/balearicislands.py
 reescraper/canaryislands.py
+reescraper/iberianpeninsula.py
 reescraper/balearic/__init__.py
 reescraper/balearic/mallorca.py
 reescraper/balearic/menorca.py
