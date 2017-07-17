@@ -15,7 +15,7 @@ class Scraper(object):
         else:
             self.session = Session()
 
-    def get(self, zone, timezone, system="Canarias", date=None):
+    def get(self, zone, timezone, system="Canarias", date=None, last=True):
         if not date:
             date = self._searchdate(timezone)
         url = self._makeurl(zone, date, system)
@@ -25,21 +25,37 @@ class Scraper(object):
             arrow = self._timestamp(ts, timezone)
             response = Response(arrow.float_timestamp)
             response.demand = value['dem']
-            response.diesel = value['die']
-            response.gas = value['gas']
+            if 'die' in value:
+                response.diesel = value['die']
+            if 'gas' in value:
+                response.gas = value['gas']
+            if 'gf' in value:
+                response.gas = value['gf']
             response.wind = value['eol']
             response.combined = value['cc']
             if 'vap' in value:
                 response.vapor = value['vap']
-            response.solar = value['fot']
+            if 'fot' in value:
+                response.solar = value['fot']
+            if 'sol' in value:
+                response.solar = value['sol']
             if 'hid' in value:
                 response.hydraulic = value['hid']
             if 'car' in value:
                 response.carbon = value['car']
+            if 'termRenov' and 'cogenResto' in value:
+                response.other = value['termRenov'] + value['cogenResto']
             if 'cb' in value:
                 response.link['pe_ma'] = value['cb']
+            if 'icb' in value:
+                response.link['pe_ma'] = value['icb']
+            if 'inter' in value:
+                response.link['int'] = value['inter']
             responses.append(response)
-        return max(responses, key=attrgetter('timestamp'))
+        if last:
+            return max(responses, key=attrgetter('timestamp'))
+        else:
+            return responses
 
     def _request(self, url):
         response = self.session.request("GET", url)

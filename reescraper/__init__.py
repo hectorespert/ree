@@ -4,3 +4,4 @@ from .core.exceptions import NoDataException, TimestampException
 from .response import Response
 from .balearic import Mallorca, Menorca
 from .balearicislands import BalearicIslands
+from .iberianpeninsula import IberianPeninsula
