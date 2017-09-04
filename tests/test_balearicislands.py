@@ -16,5 +16,11 @@ class TestCanaryIslands(unittest.TestCase):
         self.assertIsInstance(response, Response)
         self.assertTrue('pe_ma' in response.link)
 
+    def test_get_all(self):
+        responses = self.instance.get_all()
+        self.assertIsNotNone(responses)
+        for response in responses:
+            self.assertIsInstance(response, Response)
+
 if __name__ == '__main__':
     unittest.main()

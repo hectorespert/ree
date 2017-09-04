@@ -9,3 +9,6 @@ print(response.demand)
 print(response.production())
 print(response.links())
 print(response.unknown())
+
+response = BalearicIslands(session).get_all()
+print(response)
