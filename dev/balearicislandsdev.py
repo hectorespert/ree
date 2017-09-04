@@ -1,6 +1,8 @@
 from reescraper import BalearicIslands
+from requests import Session
 
-response = BalearicIslands().get()
+session = Session()
+response = BalearicIslands(session).get()
 print(response)
 
 print(response.demand)
