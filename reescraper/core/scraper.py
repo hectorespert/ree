@@ -24,7 +24,8 @@ class Scraper(object):
             ts = value['ts']
             arrow = self._timestamp(ts, timezone)
             response = Response(arrow.float_timestamp)
-            response.demand = value['dem']
+            if 'dem' in value:
+                response.demand = value['dem']
             if 'nuc' in value:
                 response.nuclear = value['nuc']
             if 'die' in value:
@@ -33,8 +34,10 @@ class Scraper(object):
                 response.gas = value['gas']
             if 'gf' in value:
                 response.gas = value['gf']
-            response.wind = value['eol']
-            response.combined = value['cc']
+            if 'eol' in value:
+                response.wind = value['eol']
+            if 'cc' in value:
+                response.combined = value['cc']
             if 'vap' in value:
                 response.vapor = value['vap']
             if 'fot' in value:
