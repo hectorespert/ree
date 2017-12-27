@@ -14,7 +14,7 @@ class TestFuerteventura(unittest.TestCase):
         self.adapter = Adapter()
         self.session.mount('https://', self.adapter)
         self.instance = Fuerteventura(self.session)
-        json_data = resource_string("tests.mocks", "fuerteventura.json")
+        json_data = resource_string("tests.mocks", "response.json.json")
         self.adapter.register_uri(ANY, ANY, text=json_data)
 
     def test_instance(self):

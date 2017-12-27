@@ -14,7 +14,7 @@ class TestElHierro(unittest.TestCase):
         self.adapter = Adapter()
         self.session.mount('https://', self.adapter)
         self.instance = ElHierro(self.session)
-        json_data = resource_string("tests.mocks", "el_hierro.json")
+        json_data = resource_string("tests.mocks", "response.json")
         self.adapter.register_uri(ANY, ANY, text=json_data)
 
     def test_instance(self):

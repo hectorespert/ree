@@ -1,22 +1,34 @@
 import unittest
 
+from requests import Session
+from requests_mock import Adapter, ANY
+from pkg_resources import resource_string
+
 from reescraper import LanzaroteFuerteventura, Response
 
 
 class TestLanzaroteFuerteventura(unittest.TestCase):
 
     def setUp(self):
-        self.instance = LanzaroteFuerteventura()
+        self.session = Session()
+        self.adapter = Adapter()
+        self.session.mount('https://', self.adapter)
+        self.instance = LanzaroteFuerteventura(self.session)
+        json_data = resource_string("tests.mocks", "response.json")
+        self.adapter.register_uri(ANY, ANY, text=json_data)
 
     def test_instance(self):
         self.assertIsInstance(self.instance, LanzaroteFuerteventura)
 
     def test_get(self):
         response = self.instance.get()
-        if response:
-            self.assertIsInstance(response, Response)
-        else:
-            self.assertIsNone(response)
+        self.assertIsInstance(response, Response)
+        self.assertIsNotNone(response.timestamp)
+
+    def test_get_all(self):
+        responses = self.instance.get_all()
+        self.assertIsNotNone(responses)
+
 
 if __name__ == '__main__':
     unittest.main()
