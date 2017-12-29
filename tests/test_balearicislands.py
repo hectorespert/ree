@@ -1,12 +1,21 @@
 import unittest
 
+from requests import Session
+from requests_mock import Adapter, ANY
+from pkg_resources import resource_string
+
 from reescraper import BalearicIslands, Response
 
 
-class TestCanaryIslands(unittest.TestCase):
+class TestBalearicIslands(unittest.TestCase):
 
     def setUp(self):
-        self.instance = BalearicIslands()
+        self.session = Session()
+        self.adapter = Adapter()
+        self.session.mount('https://', self.adapter)
+        self.instance = BalearicIslands(self.session)
+        json_data = resource_string("tests.mocks", "balearic.txt").decode("UTF-8")
+        self.adapter.register_uri(ANY, ANY, text=json_data)
 
     def test_instance(self):
         self.assertIsInstance(self.instance, BalearicIslands)
@@ -21,6 +30,7 @@ class TestCanaryIslands(unittest.TestCase):
         self.assertIsNotNone(responses)
         for response in responses:
             self.assertIsInstance(response, Response)
+
 
 if __name__ == '__main__':
     unittest.main()

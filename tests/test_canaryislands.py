@@ -1,24 +1,28 @@
 import unittest
 
-from reescraper import CanaryIslands, Response, NoDataException, TimestampException
+from requests import Session
+from requests_mock import Adapter, ANY
+from pkg_resources import resource_string
+
+from reescraper import CanaryIslands, Response
 
 
 class TestCanaryIslands(unittest.TestCase):
 
     def setUp(self):
-        self.instance = CanaryIslands()
+        self.session = Session()
+        self.adapter = Adapter()
+        self.session.mount('https://', self.adapter)
+        self.instance = CanaryIslands(self.session)
+        json_data = resource_string("tests.mocks", "canary.txt").decode("UTF-8")
+        self.adapter.register_uri(ANY, ANY, text=json_data)
 
     def test_instance(self):
         self.assertIsInstance(self.instance, CanaryIslands)
 
     def test_get(self):
-        try:
-            response = self.instance.get()
-            self.assertIsInstance(response, Response)
-        except NoDataException:
-            self.assertTrue(True)
-        except TimestampException:
-            self.assertTrue(True)
+        response = self.instance.get()
+        self.assertIsInstance(response, Response)
 
 
 if __name__ == '__main__':
