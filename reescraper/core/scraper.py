@@ -54,6 +54,12 @@ class Scraper(object):
                 response.link['pe_ma'] = value['cb']
             if 'icb' in value:
                 response.link['pe_ma'] = value['icb']
+            if 'emm' in value:
+                response.link['ma_me'] = value['emm']
+            if 'emi' in value:
+                response.link['ma_ib'] = value['emi']
+            if 'eif' in value:
+                response.link['ib_fo'] = value['eif']
             if 'inter' in value:
                 response.link['int'] = value['inter']
             responses.append(response)
@@ -87,6 +93,4 @@ class Scraper(object):
         if not arrow:
             arrow = utcnow()
         return arrow.to(timezone).format('YYYY-MM-DD')
-
-
 
