@@ -1,15 +1,15 @@
-# reescraper (Red Eléctrica de España data scraper)
+# ree (Red Eléctrica de España data)
 
 Package install:
 
 ```
-pip install reescraper
+pip install ree
 ```
 
 Example Code:
 
 ```python
-from reescraper import CanaryIslands
+from ree import CanaryIslands
 
 generation = CanaryIslands().get()
 print(generation)
