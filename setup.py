@@ -13,10 +13,11 @@ packages = find_packages(exclude=["tests.*", "tests"])
 
 setup(
     name='ree',
-    version='2.0.0',
+    version='2.0.1',
     description='Red Eléctrica de España data',
     license='MIT',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/blackleg/ree',
     author='blackleg',
     author_email='hectorespertpardo@gmail.com',
