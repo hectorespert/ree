@@ -4,7 +4,7 @@ from requests import Session
 from requests_mock import Adapter, ANY
 from pkg_resources import resource_string
 
-from reescraper import BalearicIslands, Response
+from ree import BalearicIslands, Response
 
 
 class TestBalearicIslands(unittest.TestCase):

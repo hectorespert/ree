@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from arrow import get
 
-from reescraper.core import Scraper
+from ree.core import Scraper
 
 
 class TestScraper(TestCase):

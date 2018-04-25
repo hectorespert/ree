@@ -4,7 +4,7 @@ from requests import Session
 from requests_mock import Adapter, ANY
 from pkg_resources import resource_string
 
-from reescraper import Response, Menorca
+from ree import Response, Menorca
 
 
 class TestMenorca(unittest.TestCase):

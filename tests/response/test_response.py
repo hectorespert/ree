@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from arrow import utcnow
 
-from reescraper.response import Response
+from ree.response import Response
 
 
 class TestResponse(TestCase):

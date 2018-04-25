@@ -1,6 +1,6 @@
 import unittest
 
-from reescraper import IberianPeninsula, Response
+from ree import IberianPeninsula, Response
 
 from requests import Session
 from requests_mock import Adapter, ANY
