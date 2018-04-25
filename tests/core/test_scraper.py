@@ -1,4 +1,5 @@
 from unittest import TestCase, main
+
 from arrow import get
 
 from ree.core import Scraper

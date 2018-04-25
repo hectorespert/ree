@@ -1,10 +1,10 @@
 import unittest
 
-from ree import IberianPeninsula, Response
-
+from pkg_resources import resource_string
 from requests import Session
 from requests_mock import Adapter, ANY
-from pkg_resources import resource_string
+
+from ree import IberianPeninsula, Response
 
 
 class TestIberianPeninsula(unittest.TestCase):

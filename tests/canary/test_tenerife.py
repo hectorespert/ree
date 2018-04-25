@@ -1,8 +1,8 @@
 import unittest
 
+from pkg_resources import resource_string
 from requests import Session
 from requests_mock import Adapter, ANY
-from pkg_resources import resource_string
 
 from ree import Tenerife, Response
 

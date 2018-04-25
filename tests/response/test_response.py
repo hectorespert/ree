@@ -1,4 +1,5 @@
 from unittest import TestCase, main
+
 from arrow import utcnow
 
 from ree.response import Response
