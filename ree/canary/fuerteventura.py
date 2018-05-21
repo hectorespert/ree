@@ -3,8 +3,8 @@ from ree.core import Scraper
 
 class Fuerteventura(Scraper):
 
-    def __init__(self, session=None):
-        super(self.__class__, self).__init__(session)
+    def __init__(self, session=None, verify=True):
+        super(self.__class__, self).__init__(session, verify)
 
     def get(self, date=None, last=True):
         return super(self.__class__, self).get("FUERTEVE", "Atlantic/Canary", "Canarias", date, last)
