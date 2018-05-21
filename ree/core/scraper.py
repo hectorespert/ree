@@ -9,7 +9,8 @@ from .exceptions import ResponseCodeException, ResponseDataException
 
 class Scraper(object):
 
-    def __init__(self, session=None):
+    def __init__(self, session=None, verify=True):
+        self.verify = verify
         if session and isinstance(session, Session):
             self.session = session
         else:
@@ -69,7 +70,7 @@ class Scraper(object):
             return responses
 
     def _request(self, url):
-        response = self.session.request("GET", url)
+        response = self.session.request("GET", url, verify=self.verify)
         if response.status_code != 200:
             raise ResponseCodeException
         if not response.text:
