@@ -49,6 +49,8 @@ class Scraper(object):
                 response.hydraulic = value['hid']
             if 'car' in value:
                 response.carbon = value['car']
+            if 'resid' in value:
+                response.waste = value['resid']
             if 'termRenov' and 'cogenResto' in value:
                 response.other = value['termRenov'] + value['cogenResto']
             if 'cb' in value:

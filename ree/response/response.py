@@ -16,6 +16,7 @@ class Response(object):
         self._hydraulic = hydraulic
         self._carbon = carbon
         self._other = other
+        self._waste = 0.0
         self.link = {}
 
     @property
@@ -99,6 +100,14 @@ class Response(object):
         self._carbon = carbon
 
     @property
+    def waste(self):
+        return round(self._waste, 2)
+
+    @waste.setter
+    def waste(self, waste):
+        self._waste = waste
+
+    @property
     def other(self):
         return round(self._other, 2)
 
@@ -107,7 +116,7 @@ class Response(object):
         self._other = other
 
     def __str__(self):
-        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9} Nuclear: {10} Other: {11}"
+        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9} Nuclear: {10} Waste: {11} Other: {12}"
         return base.format(get(self.timestamp),
                            self.demand,
                            self.diesel,
@@ -119,6 +128,7 @@ class Response(object):
                            self.hydraulic,
                            self.carbon,
                            self.nuclear,
+                           self.waste,
                            self.other)
 
     def __repr__(self):
@@ -126,7 +136,7 @@ class Response(object):
 
     def _production(self):
         """Calculate total energy production. Not rounded"""
-        return self._nuclear + self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon + self._other
+        return self._nuclear + self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon + self._waste +  self._other
 
     def production(self):
         """Calculate total energy production."""
