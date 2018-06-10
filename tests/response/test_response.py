@@ -25,8 +25,9 @@ class TestResponse(TestCase):
         response.solar = 100000.0
         response.hydraulic = 1000000.0
         response.carbon = 10000000.0
+        response.waste = 100000000.0
 
-        expected = 11111111.0
+        expected = 111111111.0
         result = response.production()
         self.assertEqual(result, expected)
 

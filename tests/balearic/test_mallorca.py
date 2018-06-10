@@ -26,6 +26,7 @@ class TestMallorca(unittest.TestCase):
         self.assertIsNotNone(response.timestamp)
         self.assertEqual(response.demand, 497.3)
         self.assertEqual(response.carbon, 315.9)
+        self.assertEqual(response.waste, 25.7)
         self.assertEqual(response.link['pe_ma'], 80.3)
         self.assertEqual(response.link['ma_me'], 0.0)
         self.assertEqual(response.link['ma_ib'], -7.6)
