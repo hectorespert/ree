@@ -14,7 +14,7 @@ packages = find_packages(exclude=["tests.*", "tests"])
 
 setup(
     name='ree',
-    version='2.2.0',
+    version='2.2.1',
     description='Red Eléctrica de España data',
     license='MIT',
     long_description=long_description,
