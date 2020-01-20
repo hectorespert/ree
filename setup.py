@@ -1,33 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from codecs import open
-from os import path
+import setuptools
 
-from setuptools import setup, find_packages
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-here = path.abspath(path.dirname(__file__))
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
-
-packages = find_packages(exclude=["tests.*", "tests"])
-
-setup(
-    name='ree',
-    version='2.2.1',
-    description='Red Eléctrica de España data',
-    license='MIT',
+setuptools.setup(
+    name="ree",
+    version="2.2.2",
+    author="blackleg",
+    author_email="hectorespertpardo@gmail.com",
+    description="UNOFFICIAL Red Eléctrica de España data client",
     long_description=long_description,
-    long_description_content_type='text/markdown',
-    url='https://github.com/blackleg/ree',
-    author='blackleg',
-    author_email='hectorespertpardo@gmail.com',
-    classifiers=[
-        'License :: OSI Approved :: MIT License'
-    ],
-    packages=packages,
+    long_description_content_type="text/markdown",
+    url="https://github.com/blackleg/ree",
+    packages=setuptools.find_packages(),
     install_requires=[
         'arrow',
         'requests'
+    ],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ]
 )
