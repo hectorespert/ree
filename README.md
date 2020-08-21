@@ -1,12 +1,13 @@
 # ree (Red Eléctrica de España data)
+Library to query information of Spain  electric energy demand from Red Eléctrica de España data.
 
-Package install:
+## Package install:
 
-```
+```bash
 pip install ree
 ```
 
-Example Code:
+### Example Code:
 
 ```python
 from ree import CanaryIslands
