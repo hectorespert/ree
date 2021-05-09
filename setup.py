@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import setuptools
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name="ree",
-    version="2.2.2",
+    version="2.2.3",
     author="blackleg",
     author_email="hectorespertpardo@gmail.com",
     description="UNOFFICIAL Red Eléctrica de España data client",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/blackleg/ree",
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     install_requires=[
         'arrow',
         'requests'
