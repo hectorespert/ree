@@ -1,3 +1,0 @@
-arrow
-requests
-requests-mock
