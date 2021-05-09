@@ -8,7 +8,8 @@ with open("README.md", "r") as fh:
 
 setup(
     name="ree",
-    version="2.2.3",
+    version_config=True,
+    setup_requires=['setuptools-git-versioning'],
     author="blackleg",
     author_email="hectorespertpardo@gmail.com",
     description="UNOFFICIAL Red Eléctrica de España data client",
