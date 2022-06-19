@@ -80,7 +80,7 @@ class Scraper(object):
         return self.__getjson(response.text)
 
     def _makeurl(self, zone, date, system="Canarias"):
-        base = "https://demanda.ree.es/WSvisionaMoviles{2}Rest/resources/demandaGeneracion{2}?curva={0}&fecha={1}"
+        base = "https://demanda.ree.es/WSvisionaMoviles{2}Rest/resources/demandaGeneracion{2}5M?curva={0}&fecha={1}"
         return base.format(zone, date, system)
 
     def __getjson(self, text):
