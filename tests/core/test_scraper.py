@@ -30,10 +30,10 @@ class TestScraper(TestCase):
         zone = "GCANARIA"
         date = "2017-07-13"
         result = self.scrapper._makeurl(zone, date)
-        expected = "https://demanda.ree.es/WSvisionaMovilesCanariasRest/resources/demandaGeneracionCanarias?curva=GCANARIA&fecha=2017-07-13"
+        expected = "https://demanda.ree.es/WSvisionaMovilesCanariasRest/resources/demandaGeneracionCanarias?curva=GCANARIA5M&fecha=2017-07-13"
         self.assertEqual(result, expected)
         result = self.scrapper._makeurl(zone, date, "Baleares")
-        expected = "https://demanda.ree.es/WSvisionaMovilesBalearesRest/resources/demandaGeneracionBaleares?curva=GCANARIA&fecha=2017-07-13"
+        expected = "https://demanda.ree.es/WSvisionaMovilesBalearesRest/resources/demandaGeneracionBaleares?curva=GCANARIA5M&fecha=2017-07-13"
         self.assertEqual(result, expected)
 
 if __name__ == '__main__':

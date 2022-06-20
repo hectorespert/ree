@@ -1,8 +1,6 @@
 import unittest
 
-from pkg_resources import resource_string
-from requests import Session
-from requests_mock import Adapter, ANY
+from arrow import get
 
 from ree import Response, Mallorca
 
@@ -10,26 +8,22 @@ from ree import Response, Mallorca
 class TestMallorca(unittest.TestCase):
 
     def setUp(self):
-        self.session = Session()
-        self.adapter = Adapter()
-        self.session.mount('https://', self.adapter)
-        self.instance = Mallorca(self.session)
-        json_data = resource_string("tests.mocks", "mallorca.txt").decode("UTF-8")
-        self.adapter.register_uri(ANY, ANY, text=json_data)
+        self.instance = Mallorca()
+        self.date = get('2022-06-20').format('YYYY-MM-DD')
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Mallorca)
 
     def test_get(self):
-        response = self.instance.get()
+        response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertIsNotNone(response.timestamp)
-        self.assertEqual(response.demand, 497.3)
-        self.assertEqual(response.carbon, 315.9)
-        self.assertEqual(response.waste, 25.7)
-        self.assertEqual(response.link['pe_ma'], 80.3)
-        self.assertEqual(response.link['ma_me'], 0.0)
-        self.assertEqual(response.link['ma_ib'], -7.6)
+        self.assertEqual(response.demand, 688.2)
+        self.assertEqual(response.carbon, 70.6)
+        self.assertEqual(response.waste, 49.8)
+        self.assertEqual(response.link['pe_ma'], 41.8)
+        self.assertEqual(response.link['ma_me'], -5.6)
+        self.assertEqual(response.link['ma_ib'], -91.5)
 
     def test_get_all(self):
         responses = self.instance.get_all()

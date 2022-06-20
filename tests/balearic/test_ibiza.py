@@ -1,8 +1,6 @@
 import unittest
 
-from pkg_resources import resource_string
-from requests import Session
-from requests_mock import Adapter, ANY
+from arrow import get
 
 from ree import Response, Ibiza
 
@@ -10,25 +8,21 @@ from ree import Response, Ibiza
 class TestIbiza(unittest.TestCase):
 
     def setUp(self):
-        self.session = Session()
-        self.adapter = Adapter()
-        self.session.mount('https://', self.adapter)
-        self.instance = Ibiza(self.session)
-        json_data = resource_string("tests.mocks", "ibiza.txt").decode("UTF-8")
-        self.adapter.register_uri(ANY, ANY, text=json_data)
+        self.instance = Ibiza()
+        self.date = get('2022-06-20').format('YYYY-MM-DD')
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Ibiza)
 
     def test_get(self):
-        response = self.instance.get()
+        response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertIsNotNone(response.timestamp)
-        self.assertEqual(response.demand, 102.5)
+        self.assertEqual(response.demand, 164.6)
         self.assertEqual(response.carbon, 0.0)
         self.assertEqual(response.link['pe_ma'], 0.0)
         self.assertEqual(response.link['ma_me'], 0.0)
-        self.assertEqual(response.link['ma_ib'], 4.4)
+        self.assertEqual(response.link['ma_ib'], 91.5)
 
     def test_get_all(self):
         responses = self.instance.get_all()
