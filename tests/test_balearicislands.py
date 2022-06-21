@@ -1,8 +1,6 @@
 import unittest
 
-from pkg_resources import resource_string
-from requests import Session
-from requests_mock import Adapter, ANY
+from arrow import get
 
 from ree import BalearicIslands, Response
 
@@ -10,19 +8,16 @@ from ree import BalearicIslands, Response
 class TestBalearicIslands(unittest.TestCase):
 
     def setUp(self):
-        self.session = Session()
-        self.adapter = Adapter()
-        self.session.mount('https://', self.adapter)
-        self.instance = BalearicIslands(self.session)
-        json_data = resource_string("tests.mocks", "balearic.txt").decode("UTF-8")
-        self.adapter.register_uri(ANY, ANY, text=json_data)
+        self.instance = BalearicIslands()
+        self.date = get('2022-06-10').format('YYYY-MM-DD')
 
     def test_instance(self):
         self.assertIsInstance(self.instance, BalearicIslands)
 
     def test_get(self):
-        response = self.instance.get()
+        response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
+        self.assertEqual(546.8, response.demand)
         self.assertTrue('pe_ma' in response.link)
 
     def test_get_all(self):

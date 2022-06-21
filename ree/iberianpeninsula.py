@@ -7,4 +7,4 @@ class IberianPeninsula(Scraper):
         super(self.__class__, self).__init__(session, verify)
 
     def get(self, date=None, last=True):
-        return super(self.__class__, self).get("DEMANDA", "Europe/Madrid", "Peninsula", date, last)
+        return super(self.__class__, self).get("DEMANDAQH", "Europe/Madrid", "Peninsula", date, last)

@@ -1,8 +1,6 @@
 import unittest
 
-from pkg_resources import resource_string
-from requests import Session
-from requests_mock import Adapter, ANY
+from arrow import get
 
 from ree import IberianPeninsula, Response
 
@@ -10,19 +8,16 @@ from ree import IberianPeninsula, Response
 class TestIberianPeninsula(unittest.TestCase):
 
     def setUp(self):
-        self.session = Session()
-        self.adapter = Adapter()
-        self.session.mount('https://', self.adapter)
-        self.instance = IberianPeninsula(self.session)
-        data = resource_string("tests.mocks", "peninsula.txt")
-        self.adapter.register_uri(ANY, ANY, text=data.decode("UTF-8"))
+        self.instance = IberianPeninsula()
+        self.date = get('2022-06-20').format('YYYY-MM-DD')
 
     def test_instance(self):
         self.assertIsInstance(self.instance, IberianPeninsula)
 
     def test_get(self):
-        response = self.instance.get()
+        response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
+        self.assertEqual(24646, response.demand)
         self.assertTrue('pe_ma' in response.link)
         self.assertTrue('int' in response.link)
 

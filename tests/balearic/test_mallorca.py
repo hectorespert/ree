@@ -18,12 +18,12 @@ class TestMallorca(unittest.TestCase):
         response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertIsNotNone(response.timestamp)
-        self.assertEqual(response.demand, 688.2)
-        self.assertEqual(response.carbon, 70.6)
-        self.assertEqual(response.waste, 49.8)
-        self.assertEqual(response.link['pe_ma'], 41.8)
-        self.assertEqual(response.link['ma_me'], -5.6)
-        self.assertEqual(response.link['ma_ib'], -91.5)
+        self.assertEqual(response.demand, 480.2)
+        self.assertEqual(71.3, response.carbon)
+        self.assertEqual(50.9, response.waste)
+        self.assertEqual(42.7, response.link['pe_ma'])
+        self.assertEqual(-2.7, response.link['ma_me'])
+        self.assertEqual(-86.9, response.link['ma_ib'])
 
     def test_get_all(self):
         responses = self.instance.get_all()

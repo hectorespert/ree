@@ -18,11 +18,11 @@ class TestIbiza(unittest.TestCase):
         response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertIsNotNone(response.timestamp)
-        self.assertEqual(response.demand, 164.6)
+        self.assertEqual(response.demand, 115.6)
         self.assertEqual(response.carbon, 0.0)
         self.assertEqual(response.link['pe_ma'], 0.0)
         self.assertEqual(response.link['ma_me'], 0.0)
-        self.assertEqual(response.link['ma_ib'], 91.5)
+        self.assertEqual(86.9, response.link['ma_ib'])
 
     def test_get_all(self):
         responses = self.instance.get_all()
