@@ -1,8 +1,6 @@
 import unittest
 
-from pkg_resources import resource_string
-from requests import Session
-from requests_mock import Adapter, ANY
+from arrow import get
 
 from ree import Lanzarote, Response
 
@@ -10,20 +8,17 @@ from ree import Lanzarote, Response
 class TestLanzarote(unittest.TestCase):
 
     def setUp(self):
-        self.session = Session()
-        self.adapter = Adapter()
-        self.session.mount('https://', self.adapter)
-        self.instance = Lanzarote(self.session)
-        json_data = resource_string("tests.mocks", "canary.txt").decode("UTF-8")
-        self.adapter.register_uri(ANY, ANY, text=json_data)
+        self.instance = Lanzarote()
+        self.date = get('2022-06-20').format('YYYY-MM-DD')
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Lanzarote)
 
     def test_get(self):
-        response = self.instance.get()
+        response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertIsNotNone(response.timestamp)
+        self.assertEqual(72.0, response.demand)
 
     def test_get_all(self):
         responses = self.instance.get_all()
