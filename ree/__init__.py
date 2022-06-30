@@ -5,3 +5,4 @@ from .response import Response
 from .balearic import Mallorca, Menorca, Ibiza, Formentera
 from .balearicislands import BalearicIslands
 from .iberianpeninsula import IberianPeninsula
+from .cities import Ceuta, Melilla
