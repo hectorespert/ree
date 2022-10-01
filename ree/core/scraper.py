@@ -31,6 +31,8 @@ class Scraper(object):
                 response.nuclear = value['nuc']
             if 'die' in value:
                 response.diesel = value['die']
+            if 'genAux' in value:
+                response.diesel = value['genAux']
             if 'gas' in value:
                 response.gas = value['gas']
             if 'gf' in value:
