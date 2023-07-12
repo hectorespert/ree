@@ -1,7 +1,6 @@
 from typing import List, Union
 from arrow import get, utcnow
 from requests import Session
-from re import sub
 from json import loads
 from operator import attrgetter
 from ..response import Response
@@ -45,7 +44,7 @@ class Scraper(object):
             self.session = Session()
 
     def _get(
-        self, zone, timezone, system="Canarias", date=None, last=True, session=None
+        self, zone, timezone, system="Canarias", date=None, last=True
     ) -> Union[Response, List[Response]]:
         if not date:
             date = self._searchdate(timezone)
@@ -75,19 +74,15 @@ class Scraper(object):
         else:
             return responses
 
-    def get(
-        self, zone, timezone, system="Canarias", date=None, last=True, session=None
-    ) -> Response:
-        response = self._get(zone, timezone, system, date, last, session)
+    def get(self, zone, timezone, system="Canarias", date=None, last=True) -> Response:
+        response = self._get(zone, timezone, system, date, last)
         if isinstance(response, Response):
             return response
         else:
             raise TypeError
 
-    def get_all(
-        self, zone, timezone, system="Canarias", date=None, session=None
-    ) -> List[Response]:
-        response_list = self._get(zone, timezone, system, date, False, session)
+    def get_all(self, zone, timezone, system="Canarias", date=None) -> List[Response]:
+        response_list = self._get(zone, timezone, system, date, False)
         if isinstance(response_list, list):
             return response_list
         else:
@@ -104,9 +99,8 @@ class Scraper(object):
     def _makeurl(self, zone, date, system="Canarias"):
         return f"https://demanda.ree.es/WSvisionaMoviles{system}Rest/resources/demandaGeneracion{system}?curva={zone}&fecha={date}"
 
-    def __getjson(self, text):
-        removed_null = sub(r"null\(", "", text)
-        response_cleaned = sub(r"\);", "", removed_null)
+    def __getjson(self, text: str):
+        response_cleaned = text.replace("null(", "", 1).replace(r");", "", 1)
         json = loads(response_cleaned)
         return json["valoresHorariosGeneracion"]
 

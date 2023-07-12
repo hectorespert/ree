@@ -6,6 +6,8 @@ from requests_mock import ANY, GET, Adapter
 
 from ree import Menorca, Response
 
+MOCK_FILE = "tests/mocks/Menorca.txt"
+
 
 class TestResponse(TestCase):
     def setUp(self):
@@ -17,7 +19,7 @@ class TestResponse(TestCase):
         self.session.mount("https://", self.adapter)
 
     def test_instance(self):
-        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+        with open(MOCK_FILE, "rb") as menorca_mock:
             self.adapter.register_uri(
                 GET,
                 ANY,
@@ -28,7 +30,7 @@ class TestResponse(TestCase):
         self.assertEqual(instance.timestamp, self.timestamp)
 
     def test_to_dict(self):
-        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+        with open(MOCK_FILE, "rb") as menorca_mock:
             self.adapter.register_uri(
                 GET,
                 ANY,
@@ -91,7 +93,7 @@ class TestResponse(TestCase):
         self.assertEqual(result, expected)
 
     def test_unknown(self):
-        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+        with open(MOCK_FILE, "rb") as menorca_mock:
             self.adapter.register_uri(
                 GET,
                 ANY,
