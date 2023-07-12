@@ -1,19 +1,61 @@
 from unittest import TestCase, main
 
-from arrow import utcnow
+from arrow import get
+from requests import Session
+from requests_mock import ANY, GET, Adapter
 
-from ree.response import Response
+from ree import Menorca, Response
 
 
 class TestResponse(TestCase):
-
     def setUp(self):
-        self.timestamp = utcnow().timestamp
+        self.timestamp = get(
+            "2023-07-12 19:20" + " " + "Europe/Madrid", "YYYY-MM-DD HH:mm ZZZ"
+        ).timestamp()
+        self.session = Session()
+        self.adapter = Adapter()
+        self.session.mount("https://", self.adapter)
 
     def test_instance(self):
-        instance = Response(self.timestamp)
+        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+            self.adapter.register_uri(
+                GET,
+                ANY,
+                content=menorca_mock.read(),
+            )
+        instance = Menorca(session=self.session).get()
         self.assertIsInstance(instance, Response)
         self.assertEqual(instance.timestamp, self.timestamp)
+
+    def test_to_dict(self):
+        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+            self.adapter.register_uri(
+                GET,
+                ANY,
+                content=menorca_mock.read(),
+            )
+        response = Menorca(session=self.session).get()
+        expected = {
+            "carbon": 0.0,
+            "combined": 0.0,
+            "datetime": "2023-07-12T17:20:00+00:00",
+            "demand": 110.1,
+            "diesel": 31.2,
+            "gas": 57.1,
+            "hydraulic": None,
+            "nuclear": None,
+            "other": None,
+            "solar": 1.3,
+            "timestamp": 1689182400.0,
+            "vapor": None,
+            "waste": 0.0,
+            "wind": 0.0,
+        }
+        response_dict = response.to_dict()
+        self.assertEqual(response_dict, expected)
+        datetime = response_dict["datetime"]
+        timestamp = response_dict["timestamp"]
+        self.assertEqual(get(datetime), get(timestamp))
 
     def test_production(self):
         response = Response(self.timestamp)
@@ -33,45 +75,49 @@ class TestResponse(TestCase):
 
     def test_links(self):
         response = Response(self.timestamp)
-        response.link['a'] = 1.0
-        response.link['b'] = 10.0
-        response.link['c'] = 100.0
-        response.link['d'] = -100.0
+        response.link["a"] = 1.0
+        response.link["b"] = 10.0
+        response.link["c"] = 100.0
+        response.link["d"] = -100.0
 
         expected = 11.0
         result = response.links()
         self.assertEqual(result, expected)
 
-        response.link['e'] = -21.0
+        response.link["e"] = -21.0
 
         expected = -10.0
         result = response.links()
         self.assertEqual(result, expected)
 
     def test_unknown(self):
-        response = Response(self.timestamp)
-        response.demand = 250.0
-        response.diesel = 100.0
+        with open("tests/mocks/Menorca.txt", "rb") as menorca_mock:
+            self.adapter.register_uri(
+                GET,
+                ANY,
+                content=menorca_mock.read(),
+            )
+        response = Menorca(session=self.session).get()
 
-        expected = 150.0
+        expected = 0.1
         result = response.unknown()
         self.assertEqual(result, expected)
 
-        response.link['a'] = 100.0
-        expected = 50.0
+        response.link["ma_me"] = 10
+        expected = 10.5
         result = response.unknown()
         self.assertEqual(result, expected)
 
-        response.link['c'] = -300.0
-        expected = 350.0
+        response.link["ma_ib"] = -300.0
+        expected = 310.5
         result = response.unknown()
         self.assertEqual(result, expected)
 
-        response.link['c'] = 300.0
-        expected = 0.0
+        response.link["pe_ma"] = None
+        expected = 310.5
         result = response.unknown()
         self.assertEqual(result, expected)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

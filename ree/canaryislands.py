@@ -1,10 +1,17 @@
-from .canary import ElHierro, GranCanaria, Gomera, LanzaroteFuerteventura, LaPalma, Tenerife
+from typing import Optional
+from .canary import (
+    ElHierro,
+    GranCanaria,
+    Gomera,
+    LanzaroteFuerteventura,
+    LaPalma,
+    Tenerife,
+)
 from .core import Scraper, NoDataException, TimestampException
 from .response import Response
 
 
 class CanaryIslands(Scraper):
-
     def __init__(self, session=None, verify=True):
         super(self.__class__, self).__init__(session, verify)
         self.__responses = []
@@ -34,51 +41,75 @@ class CanaryIslands(Scraper):
         return response
 
     def __demand(self):
-        demand = 0.0
+        demand: Optional[float] = None
         for gen in self.__responses:
-            demand += gen._demand
+            if demand is None:
+                demand = gen._demand
+            else:
+                demand += gen._demand if gen._demand else 0.0
         return demand
 
     def __diesel(self):
-        diesel = 0.0
+        diesel: Optional[float] = None
         for gen in self.__responses:
-            diesel += gen._diesel
+            if diesel is None:
+                diesel = gen._diesel
+            else:
+                diesel += gen._diesel if gen._diesel else 0.0
         return diesel
 
     def __gas(self):
-        gas = 0.0
+        gas: Optional[float] = None
         for gen in self.__responses:
-            gas += gen._gas
+            if gas is None:
+                gas = gen._gas
+            else:
+                gas += gen._gas if gen._gas else 0.0
         return gas
 
     def __wind(self):
-        wind = 0.0
+        wind: Optional[float] = None
         for gen in self.__responses:
-            wind += gen._wind
+            if wind is None:
+                wind = gen._wind
+            else:
+                wind += gen._wind if gen._wind else 0.0
         return wind
 
     def __combined(self):
-        combined = 0.0
+        combined: Optional[float] = None
         for gen in self.__responses:
-            combined += gen._combined
+            if combined is None:
+                combined = gen._combined
+            else:
+                combined += gen._combined if gen._combined else 0.0
         return combined
 
     def __vapor(self):
-        vapor = 0.0
+        vapor: Optional[float] = None
         for gen in self.__responses:
-            vapor += gen._vapor
+            if vapor is None:
+                vapor = gen._vapor
+            else:
+                vapor += gen._vapor if gen._vapor else 0.0
         return vapor
 
     def __solar(self):
-        solar = 0.0
+        solar: Optional[float] = None
         for gen in self.__responses:
-            solar += gen._solar
+            if solar is None:
+                solar = gen._solar
+            else:
+                solar += gen._solar if gen._solar else 0.0
         return solar
 
     def __hydraulic(self):
-        hydraulic = 0.0
+        hydraulic: Optional[float] = None
         for gen in self.__responses:
-            hydraulic += gen._hydraulic
+            if hydraulic is None:
+                hydraulic = gen._hydraulic
+            else:
+                hydraulic += gen._hydraulic if gen._hydraulic else 0.0
         return hydraulic
 
     def __timestamp(self):

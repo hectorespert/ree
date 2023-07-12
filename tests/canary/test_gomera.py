@@ -6,10 +6,9 @@ from ree import Gomera, Response
 
 
 class TestGomera(unittest.TestCase):
-
     def setUp(self):
         self.instance = Gomera()
-        self.date = get('2022-06-20').format('YYYY-MM-DD')
+        self.date = get("2022-06-20").format("YYYY-MM-DD")
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Gomera)
@@ -25,5 +24,5 @@ class TestGomera(unittest.TestCase):
         self.assertIsNotNone(responses)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

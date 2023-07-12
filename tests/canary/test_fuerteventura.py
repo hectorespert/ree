@@ -6,10 +6,9 @@ from ree import Fuerteventura, Response
 
 
 class TestFuerteventura(unittest.TestCase):
-
     def setUp(self):
         self.instance = Fuerteventura()
-        self.date = get('2022-06-20').format('YYYY-MM-DD')
+        self.date = get("2022-06-20").format("YYYY-MM-DD")
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Fuerteventura)
@@ -25,5 +24,5 @@ class TestFuerteventura(unittest.TestCase):
         self.assertIsNotNone(responses)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

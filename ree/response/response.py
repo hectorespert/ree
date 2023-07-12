@@ -1,9 +1,26 @@
+from datetime import datetime, timezone
+from typing import Optional
+
 from arrow import get
 
 
 class Response(object):
-
-    def __init__(self, timestamp, demand=0.0, diesel=0.0, gas=0.0, wind=0.0, combined=0.0, vapor=0.0, solar=0.0, hydraulic=0.0, carbon=0.0, nuclear=0.0, other=0.0):
+    def __init__(
+        self,
+        timestamp,
+        demand: Optional[float] = None,
+        diesel: Optional[float] = None,
+        gas: Optional[float] = None,
+        wind: Optional[float] = None,
+        combined: Optional[float] = None,
+        vapor: Optional[float] = None,
+        solar: Optional[float] = None,
+        hydraulic: Optional[float] = None,
+        carbon: Optional[float] = None,
+        nuclear: Optional[float] = None,
+        waste: Optional[float] = None,
+        other: Optional[float] = None,
+    ):
         self.timestamp = timestamp
         self._demand = demand
         self._nuclear = nuclear
@@ -16,127 +33,149 @@ class Response(object):
         self._hydraulic = hydraulic
         self._carbon = carbon
         self._other = other
-        self._waste = 0.0
+        self._waste = waste
         self.link = {}
 
     @property
     def demand(self):
-        return round(self._demand, 2)
+        return round(self._demand, 2) if self._demand is not None else None
 
     @demand.setter
-    def demand(self, demand):
+    def demand(self, demand: Optional[float]):
         self._demand = demand
 
     @property
     def nuclear(self):
-        return round(self._nuclear, 2)
+        return round(self._nuclear, 2) if self._nuclear is not None else None
 
     @nuclear.setter
-    def nuclear(self, nuclear):
+    def nuclear(self, nuclear: Optional[float]):
         self._nuclear = nuclear
 
     @property
     def diesel(self):
-        return round(self._diesel, 2)
+        return round(self._diesel, 2) if self._diesel is not None else None
 
     @diesel.setter
-    def diesel(self, diesel):
+    def diesel(self, diesel: Optional[float]):
         self._diesel = diesel
 
     @property
     def gas(self):
-        return round(self._gas, 2)
+        return round(self._gas, 2) if self._gas is not None else None
 
     @gas.setter
-    def gas(self, gas):
+    def gas(self, gas: Optional[float]):
         self._gas = gas
 
     @property
     def wind(self):
-        return round(self._wind, 2)
+        return round(self._wind, 2) if self._wind is not None else None
 
     @wind.setter
-    def wind(self, wind):
+    def wind(self, wind: Optional[float]):
         self._wind = wind
 
     @property
     def combined(self):
-        return round(self._combined, 2)
+        return round(self._combined, 2) if self._combined is not None else None
 
     @combined.setter
-    def combined(self, combined):
+    def combined(self, combined: Optional[float]):
         self._combined = combined
 
     @property
     def vapor(self):
-        return round(self._vapor, 2)
+        return round(self._vapor, 2) if self._vapor is not None else None
 
     @vapor.setter
-    def vapor(self, vapor):
+    def vapor(self, vapor: Optional[float]):
         self._vapor = vapor
 
     @property
     def solar(self):
-        return round(self._solar, 2)
+        return round(self._solar, 2) if self._solar is not None else None
 
     @solar.setter
-    def solar(self, solar):
+    def solar(self, solar: Optional[float]):
         self._solar = solar
 
     @property
     def hydraulic(self):
-        return round(self._hydraulic, 2)
+        return round(self._hydraulic, 2) if self._hydraulic is not None else None
 
     @hydraulic.setter
-    def hydraulic(self, hydraulic):
+    def hydraulic(self, hydraulic: Optional[float]):
         self._hydraulic = hydraulic
 
     @property
     def carbon(self):
-        return round(self._carbon, 2)
+        return round(self._carbon, 2) if self._carbon is not None else None
 
     @carbon.setter
-    def carbon(self, carbon):
+    def carbon(self, carbon: Optional[float]):
         self._carbon = carbon
 
     @property
     def waste(self):
-        return round(self._waste, 2)
+        return round(self._waste, 2) if self._waste is not None else None
 
     @waste.setter
-    def waste(self, waste):
+    def waste(self, waste: Optional[float]):
         self._waste = waste
 
     @property
     def other(self):
-        return round(self._other, 2)
+        return round(self._other, 2) if self._other is not None else None
 
     @other.setter
-    def other(self, other):
+    def other(self, other: Optional[float]):
         self._other = other
 
     def __str__(self):
-        base = "Response {0} Demand {1} Diesel: {2} Gas: {3} Wind: {4} Combined: {5} Vapor: {6} Solar: {7} Hydraulic: {8} Carbon: {9} Nuclear: {10} Waste: {11} Other: {12}"
-        return base.format(get(self.timestamp),
-                           self.demand,
-                           self.diesel,
-                           self.gas,
-                           self.wind,
-                           self.combined,
-                           self.vapor,
-                           self.solar,
-                           self.hydraulic,
-                           self.carbon,
-                           self.nuclear,
-                           self.waste,
-                           self.other)
+        return f"Response {get(self.timestamp)} Demand {self.demand} Diesel: {self.diesel} Gas: {self.gas} Wind: {self.wind} Combined: {self.combined} Vapor: {self.vapor} Solar: {self.solar} Hydraulic: {self.hydraulic} Carbon: {self.carbon} Nuclear: {self.nuclear} Waste: {self.waste} Other: {self.other}"
+
+    def to_dict(self):
+        return {
+            "timestamp": self.timestamp,
+            "datetime": datetime.fromtimestamp(self.timestamp)
+            .astimezone(timezone.utc)
+            .isoformat(),
+            "demand": self._demand,
+            "diesel": self._diesel,
+            "gas": self._gas,
+            "wind": self._wind,
+            "combined": self._combined,
+            "vapor": self._vapor,
+            "solar": self._solar,
+            "hydraulic": self._hydraulic,
+            "carbon": self._carbon,
+            "nuclear": self._nuclear,
+            "waste": self._waste,
+            "other": self._other,
+        }
 
     def __repr__(self):
         return self.__str__()
 
     def _production(self):
         """Calculate total energy production. Not rounded"""
-        return self._nuclear + self._diesel + self._gas + self._wind + self._combined + self._vapor + self._solar + self._hydraulic + self._carbon + self._waste +  self._other
+        return sum(
+            getattr(self, attr) if getattr(self, attr) else 0
+            for attr in [
+                "_nuclear",
+                "_diesel",
+                "_gas",
+                "_wind",
+                "_combined",
+                "_vapor",
+                "_solar",
+                "_hydraulic",
+                "_carbon",
+                "_waste",
+                "_other",
+            ]
+        )
 
     def production(self):
         """Calculate total energy production."""
@@ -146,7 +185,7 @@ class Response(object):
         """Calculate total energy production. Not Rounded"""
         total = 0.0
         for value in self.link.values():
-            total += value
+            total += value if value else 0.0
         return total
 
     def links(self):
@@ -155,8 +194,12 @@ class Response(object):
 
     def _unknown(self):
         """Calculate unknown energy production. Not Rounded"""
-        return self._demand - (self._production() + self._links())
+        if self._demand and self._production() and self._links():
+            return self._demand - (self._production() + self._links())
+        else:
+            raise ValueError("Demand, production or links not defined")
 
     def unknown(self):
         """Calculate unknown energy production."""
-        return max(0.0, round(self._unknown(), 2))
+        if self._unknown():
+            return max(0.0, round(self._unknown(), 2))

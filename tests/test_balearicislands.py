@@ -6,10 +6,9 @@ from ree import BalearicIslands, Response
 
 
 class TestBalearicIslands(unittest.TestCase):
-
     def setUp(self):
         self.instance = BalearicIslands()
-        self.date = get('2022-06-10').format('YYYY-MM-DD')
+        self.date = get("2022-06-10").format("YYYY-MM-DD")
 
     def test_instance(self):
         self.assertIsInstance(self.instance, BalearicIslands)
@@ -18,7 +17,7 @@ class TestBalearicIslands(unittest.TestCase):
         response = self.instance.get(self.date)
         self.assertIsInstance(response, Response)
         self.assertEqual(546.8, response.demand)
-        self.assertTrue('pe_ma' in response.link)
+        self.assertTrue("pe_ma" in response.link)
 
     def test_get_all(self):
         responses = self.instance.get_all()
@@ -27,5 +26,5 @@ class TestBalearicIslands(unittest.TestCase):
             self.assertIsInstance(response, Response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

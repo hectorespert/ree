@@ -6,10 +6,9 @@ from ree import Ceuta, Response
 
 
 class TestCeuta(unittest.TestCase):
-
     def setUp(self):
         self.instance = Ceuta()
-        self.date = get('2022-06-20').format('YYYY-MM-DD')
+        self.date = get("2022-06-20").format("YYYY-MM-DD")
 
     def test_instance(self):
         self.assertIsInstance(self.instance, Ceuta)
@@ -26,5 +25,5 @@ class TestCeuta(unittest.TestCase):
         self.assertIsNotNone(responses)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

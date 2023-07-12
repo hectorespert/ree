@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 setup(
     name="ree",
     version_config=True,
-    setup_requires=['setuptools-git-versioning'],
+    setup_requires=["setuptools-git-versioning"],
     author="blackleg",
     author_email="hectorespertpardo@gmail.com",
     description="UNOFFICIAL Red Eléctrica de España data client",
@@ -17,13 +17,10 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/blackleg/ree",
     packages=find_packages(),
-    install_requires=[
-        'arrow',
-        'requests'
-    ],
+    install_requires=["arrow", "requests"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ]
+    ],
 )

@@ -6,10 +6,9 @@ from ree import LaPalma, Response
 
 
 class TestLaPalma(unittest.TestCase):
-
     def setUp(self):
         self.instance = LaPalma()
-        self.date = get('2022-06-20').format('YYYY-MM-DD')
+        self.date = get("2022-06-20").format("YYYY-MM-DD")
 
     def test_instance(self):
         self.assertIsInstance(self.instance, LaPalma)
@@ -25,5 +24,5 @@ class TestLaPalma(unittest.TestCase):
         self.assertIsNotNone(responses)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

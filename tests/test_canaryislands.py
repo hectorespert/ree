@@ -4,7 +4,6 @@ from ree import CanaryIslands, Response
 
 
 class TestCanaryIslands(unittest.TestCase):
-
     def setUp(self):
         self.instance = CanaryIslands()
 
@@ -16,5 +15,5 @@ class TestCanaryIslands(unittest.TestCase):
         self.assertIsInstance(response, Response)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
