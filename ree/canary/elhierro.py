@@ -16,5 +16,3 @@ class ElHierro(Scraper):
         return super(self.__class__, self).get_all(
             "EL_HIERRO5M", "Atlantic/Canary", "Canarias", date
         )
-
-    # https://demanda.ree.es/WSvisionaMovilesCanariasRest/resources/demandaGeneracionCanarias?curva=EL_HIERRO5M&fecha=2023-07-12
